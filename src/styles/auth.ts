@@ -42,6 +42,7 @@ export const AuthCard = styled.View`
     border-radius: 7px;
     background-color: #fff;
     gap: 5px;
+    min-width: 350px;
 `;
 
 
@@ -50,6 +51,8 @@ export const AuthCardFooter = styled.View`
    border-top-color: #91a1a5;
    padding: 4px;
    margin-top: 6px;
+   align-items: center;
+   gap: 20px;
 `;
 
 

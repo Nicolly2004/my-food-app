@@ -21,10 +21,14 @@ export default function LoginPage(){
    
    <AuthCardFooter>
     <Text>Ainda não possui uma conta?{" "} 
-         <AuthLinks href="">Inscreva-se</AuthLinks>
+         <AuthLinks href="/register">Inscreva-se</AuthLinks>
+    </Text>
+
+    <Text>Esqueceu sua senha?{" "} 
+         <AuthLinks href="/password">Clique aqui</AuthLinks>
     </Text>
    </AuthCardFooter>
-   
+
         </AuthCard>
     </AuthContainer>
 }
