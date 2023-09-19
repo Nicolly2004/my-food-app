@@ -2,9 +2,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthButtons, AuthCard, AuthCardFooter, AuthContainer, AuthLinks, AuthTitle } from "../../styles/auth";
 import { Input } from "../../components/Input";
 import { Text } from "react-native";
+import { useRouter } from "expo-router";
 
 
 export default function LoginPage(){
+
+    const router = useRouter();
+
+    const handleLogin = () => {
+      router.push("/principal");
+    };
+
+
     return <AuthContainer>
         <AuthCard>
             <AuthTitle>Login</AuthTitle>
@@ -15,7 +24,7 @@ export default function LoginPage(){
             <Input label="Senha"
             secureTextEntry />
 
-            <AuthButtons>
+            <AuthButtons onPress={handleLogin}>
                 <Text>Logar</Text>
             </AuthButtons>
    
