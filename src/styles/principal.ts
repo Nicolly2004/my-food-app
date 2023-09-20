@@ -14,6 +14,8 @@ export const PrincipalSection = styled.View`
    padding-top: 8px;
    padding-left: 4px;
    padding-right: 4px;
+   flex: 1;
+   flex-grow: 1;
 `;
 
 
@@ -47,10 +49,36 @@ export const PrincipalLojaDesc = styled.Text<PrincipalLojaDescProps>`
   color: ${({color}) => color ? color : '#7f7f7f'};
 `;
 
-export const PrincipalCardProduto = styled.View``;
+export const PrincipalCardProduto = styled.View`
+flex: 1 ;
+flex-grow: 1;
+flex-direction: row;
+`;
+
+export const PrincipalProdutoImg = styled(Image)`
+width: 70px;
+height: 70px;
+border-radius: 8px;
+object-fit: cover;
+`;
+
+export const PrincipalProdutoPrice = styled.Text`
+color: #3CB371;
+`;
 
 
-export const PrincipalCardProdutoTitle = styled.Text``;
+
+export const PrincipalProdutoTempo = styled.Text`
+color: #7f7f7f
+`;
+
+
+
+
+export const PrincipalCardProdutoTitle = styled.Text`
+font-weight: bold;
+font-size: 15px;
+`;
 
 
 export const PrincipalLojaName = styled.Text``;

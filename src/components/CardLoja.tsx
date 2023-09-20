@@ -30,9 +30,11 @@ export const CardLoja = () => {
          <PrincipalLojaName>Nome da Loja</PrincipalLojaName>
 
          <Row>
-        <Row>
-            <Icon name="star" color="#d7d119" />
+        <Row grow={1} justifyContent="space-between">
+            <Row>
+            <Icon name="star" color="#d7d119" size={12} />
             <PrincipalLojaDesc color="#c1bb11">5</PrincipalLojaDesc>
+            </Row>
         </Row>
         <PrincipalLojaDesc>•</PrincipalLojaDesc>
         <PrincipalLojaDesc>Lanches</PrincipalLojaDesc>

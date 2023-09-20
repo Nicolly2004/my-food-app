@@ -46,6 +46,8 @@ export const Column = styled.View<ColumnProps>`
 export const Row = styled.View<RowProps>`
    flex-direction: row;
 
+   flex-wrap: wrap;
+
    background-color: ${({bg}) => bg ? bg : "none"};
 
    justify-content: ${({justifyContent}) => 
