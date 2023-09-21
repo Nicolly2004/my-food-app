@@ -9,7 +9,7 @@ interface ColumnProps{
    justifyItems?: string;
    grow?: number;
    bg?: string;
-
+   p?: string;
 }
 
 interface RowProps{
@@ -19,8 +19,17 @@ interface RowProps{
     justifyItems?: string;
     grow?: number;
     bg?: string;
- }
+    p?:string;
+}
 
+export const Container = styled.SafeAreaView``;
+
+export const Divider = styled.View`
+   border-bottom-width: 1px;
+   border-bottom-color: #c3c3c3;
+   border-bottom-style: solid;
+   flex-grow: 1;
+`;
 
 export const Column = styled.View<ColumnProps>`
    flex-direction: column;
@@ -40,6 +49,8 @@ export const Column = styled.View<ColumnProps>`
    justifyItems ? justifyItems: "initial"};
 
    flex-grow: ${({grow}) => grow ? grow : 0};
+
+   padding: ${({p}) => p ? p : "0"};
 `;
 
 
@@ -60,7 +71,9 @@ export const Row = styled.View<RowProps>`
    justify-items: ${({justifyItems}) =>
    justifyItems ? justifyItems: "initial"};
 
-flex-grow: ${({grow}) => grow ? grow : 0};
+   flex-grow: ${({grow}) => grow ? grow : 0};
+
+   padding: ${({p}) => p ? p : "0"};
 
 `;
 

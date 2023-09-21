@@ -14,12 +14,13 @@ import {
 
 import { Column, Row } from "../styles/global";
 import { Text } from 'react-native';
-
-
+import { Link } from 'expo-router';
 
 
 export const CardLoja = () => {
+
     return (
+        <Link href="/principal/lojas/1">
         <PrincipalCardLoja>
        <Row gap="8px" alignItems= "center">
        <LojaImg source={{
@@ -28,13 +29,12 @@ export const CardLoja = () => {
          />
          <Column gap="6px">
          <PrincipalLojaName>Nome da Loja</PrincipalLojaName>
-
-         <Row>
-        <Row grow={1} justifyContent="space-between">
-            <Row>
+    <Row grow={1} justifyContent="space-between">
+        <Row >
+            
             <Icon name="star" color="#d7d119" size={12} />
             <PrincipalLojaDesc color="#c1bb11">5</PrincipalLojaDesc>
-            </Row>
+            
         </Row>
         <PrincipalLojaDesc>•</PrincipalLojaDesc>
         <PrincipalLojaDesc>Lanches</PrincipalLojaDesc>
@@ -49,5 +49,6 @@ export const CardLoja = () => {
        </Row>
        
        </PrincipalCardLoja>
-    )
+       </Link>
+    );
 }

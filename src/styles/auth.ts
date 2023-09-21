@@ -29,7 +29,7 @@ export const  AuthLinks = styled(Link)`
 `;
 
 
-export const AuthButtons = styled.TouchableHighlight`
+export const AuthButtons = styled.TouchableOpacity`
     background-color: #66CDAA;
     padding: 4px;
     border-radius: 5px;

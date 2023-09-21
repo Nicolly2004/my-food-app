@@ -25,7 +25,7 @@ export default function PrincipalPage() {
         <Row grow={1}>
         <Row justifyContent="space-between" grow={1}>
             <PrincipalSectionTitle>Lojas</PrincipalSectionTitle>
-            <PrincipalSectionLink href="">Ver Todas</PrincipalSectionLink>
+            <PrincipalSectionLink href="/principal/lojas">Ver Todas</PrincipalSectionLink>
         </Row>
         <Row>
         <CardLoja/>
@@ -41,7 +41,7 @@ export default function PrincipalPage() {
             <PrincipalSectionTitle>Produtos</PrincipalSectionTitle>
             <PrincipalSectionLink href="">Ver Todos</PrincipalSectionLink>
         </Row>
-        
+
         <Column >
            <CardProduto/>
            <CardProduto/>

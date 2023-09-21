@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "my-food",
+    "name": "MyF food",
     "slug": "my-food",
+    "scheme":"my-food",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
