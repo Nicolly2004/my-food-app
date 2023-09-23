@@ -40,7 +40,7 @@ export const LojaImg = styled(Image)`
 export const PrincipalCard = styled.View``;
 
 
-export const PrincipalCardLoja = styled.View`
+export const PrincipalCardLoja = styled.TouchableOpacity`
   padding: 4px;
   flex-direction: row;
   align-items: center;

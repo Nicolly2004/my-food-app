@@ -23,7 +23,7 @@ import { Link } from 'expo-router';
 export const CardLoja = () => {
 
     return (
-        <Link href="/principal/lojas/1">
+        <Link href="/principal/lojas/1" asChild > 
         <PrincipalCardLoja>
           <LojaImg source={{
             uri: "https://static.itdg.com.br/images/1200-630/150ba2d5d2874bed8561dd8edbdc1323/164773-original.jpg",

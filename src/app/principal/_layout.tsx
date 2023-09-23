@@ -2,6 +2,7 @@ import { Stack } from "expo-router";
 import { Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useRouter} from 'expo-router';
+import { BackButton } from "../../styles/global";
 
 
 export default function PrincipalPageLayout() {
@@ -51,12 +52,12 @@ export default function PrincipalPageLayout() {
            // presentation: "modal",
             headerLeft({tintColor}) {
                 return (
-                <Pressable onPress={() => {
+                <BackButton onPress={() => {
                     router.back();
                 }}
                 >
                 <Icon name="angle-left" color={tintColor} size={20}/>
-                </Pressable>
+                </BackButton>
                 );
             },
             headerStyle:{

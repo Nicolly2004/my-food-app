@@ -85,4 +85,7 @@ export const Row = styled.View<RowProps>`
 
 `;
 
+export const BackButton = styled.TouchableOpacity`
+padding: 5px;
+`;
 
