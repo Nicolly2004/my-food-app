@@ -48,7 +48,7 @@ export default function PrincipalPageLayout() {
             headerTintColor: "#FFF",
             headerTitleAlign: "center",
             headerShadowVisible: false,
-            presentation: "modal",
+           // presentation: "modal",
             headerLeft({tintColor}) {
                 return (
                 <Pressable onPress={() => {

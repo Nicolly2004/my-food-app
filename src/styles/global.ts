@@ -22,7 +22,15 @@ interface RowProps{
     p?:string;
 }
 
-export const Container = styled.SafeAreaView``;
+interface ContainerProps{
+    bg?: string;
+    p?:string;
+}
+
+export const Container = styled.ScrollView<ContainerProps>`
+background-color: ${({bg}) =>( bg ? bg : "none")};
+padding: ${({p}) => p ? p : 0}
+`;
 
 export const Divider = styled.View`
    border-bottom-width: 1px;
