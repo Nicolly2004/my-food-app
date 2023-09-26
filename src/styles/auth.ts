@@ -24,6 +24,15 @@ export const  AuthFormControl = styled.View`
 `;
 
 
+
+export const ErrorsMessage = styled.Text`
+font-size: 12px;
+font-weight: 700;
+color: #FF1425;
+`;
+
+
+
 export const  AuthLinks = styled(Link)`
    color: #66CDAA;
 `;
