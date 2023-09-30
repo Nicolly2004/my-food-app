@@ -18,7 +18,7 @@ const validation = yup.object().shape({
     name: yup.string().required("O nome é obrigatório"),
     email: yup
     .string()
-    .required("O email é obrigatório")
+    .required("O e-mail é obrigatório")
     .email("E-mail inválido"),
     password: yup
     .string()

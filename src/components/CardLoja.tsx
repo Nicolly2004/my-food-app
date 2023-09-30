@@ -18,34 +18,43 @@ import {
 import { Column, Row } from "../styles/global";
 import { Text } from 'react-native';
 import { Link } from 'expo-router';
+import { LojaProps } from '../services/lojas';
+import { FC } from 'react';
 
 
-export const CardLoja = () => {
+interface CardLojaProps {
+  loja: LojaProps;
+}
+
+export const CardLoja:FC<CardLojaProps> = ({loja}) => {
 
     return (
-        <Link href="/principal/lojas/1" asChild > 
+        <Link href={`/principal/lojas/${loja.id}`} asChild > 
         <PrincipalCardLoja>
-          <LojaImg source={{
-            uri: "https://static.itdg.com.br/images/1200-630/150ba2d5d2874bed8561dd8edbdc1323/164773-original.jpg",
+          <LojaImg 
+          source={{
+            uri: loja.imageLogo,
          }}
          />
          <PrincipalLojaDetails>
-         <PrincipalLojaName>Nome da Loja</PrincipalLojaName>
+         <PrincipalLojaName>{loja.nome}</PrincipalLojaName>
 
     <PrincipalLojaRow>
         <PrincipalLojaStar>
             <Icon name="star" color="#d7d119" size={12} />
-            <PrincipalLojaDesc color="#c1bb11">5</PrincipalLojaDesc>
+            <PrincipalLojaDesc color="#c1bb11">{loja.nota}</PrincipalLojaDesc>
             
         </PrincipalLojaStar>
         <PrincipalLojaDesc>•</PrincipalLojaDesc>
-        <PrincipalLojaDesc>Lanches</PrincipalLojaDesc>
+        <PrincipalLojaDesc>{loja.categria}</PrincipalLojaDesc>
        </PrincipalLojaRow>
 
        <Row>
-       <PrincipalLojaDesc>30 - 45min</PrincipalLojaDesc>
+       <PrincipalLojaDesc>{loja.tempo}</PrincipalLojaDesc>
        <PrincipalLojaDesc>•</PrincipalLojaDesc>
-        <PrincipalLojaDesc>R$ 15,00</PrincipalLojaDesc>
+        <PrincipalLojaDesc color={loja.taxa_entrega > 0 ? null : "#12af12"}>
+          {loja.taxa_entrega > 0 ? loja.taxa_entrega : "Grátis"}
+        </PrincipalLojaDesc>
        </Row>
          </PrincipalLojaDetails>
        

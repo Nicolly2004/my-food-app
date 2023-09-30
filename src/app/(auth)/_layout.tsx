@@ -1,7 +1,10 @@
 import { Stack } from "expo-router";
+import { AuthProvider } from "../../contexts/AuthContext";
+import { Providers } from "../Providers";
 
 export default function LayoutAuth(){
     return (
+    <Providers>
     <Stack>
         <Stack.Screen 
         name="index" 
@@ -25,5 +28,6 @@ export default function LayoutAuth(){
         />
         
     </Stack>
+    </Providers>
     );
 }

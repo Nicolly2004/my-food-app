@@ -18,16 +18,35 @@ import {
 import { CardLoja } from '../../components/CardLoja';
 import { Column, Row } from "../../styles/global";
 import { CardProduto } from "../../components/CardProduto";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { ProdutoModal } from "../../components/ProdutoModal";
+import { LojaProps, getLojas } from "../../services/lojas";
+import { ActivityIndicator} from 'react-native';
+import { RefreshControl } from "react-native-gesture-handler";
+
 
 export default function PrincipalPage() {
 
     const [modalIsOpen,setModalIsOpen] = useState(false);
     const [produto,setProduto] = useState({});
+    const[lojas,setLojas] = useState<LojaProps[]>([]);
+    const [isLojaLoading,setIsLojaLoading] = useState(false);
+
+    const loadLojas = () => {
+        setIsLojaLoading(true);
+        getLojas().then(({data}) => {
+            setLojas(data.data);
+            setIsLojaLoading(false);
+        })
+        .catch((error) => {});
+    }
+ 
+    useEffect(() => {
+        loadLojas();
+    }, []);
 
     const toggleModal = () => {
-        setModalIsOpen(!modalIsOpen)
+        setModalIsOpen(!modalIsOpen);
     };
 
 
@@ -41,10 +60,15 @@ export default function PrincipalPage() {
             </PrincipalSectionLink>
         </PrincipalRowTitle>
         <PrincipalList>
-        <CardLoja/>
-        <CardLoja/>
-        <CardLoja/>
-        <CardLoja/>
+
+      {isLojaLoading ? (
+         <ActivityIndicator size="small" color="#FF0000" />
+      ): 
+        lojas?.map((loja,index:number) => (
+          <CardLoja key={index} loja={loja} />
+      ))
+        }
+
       </PrincipalList>
        </PrincipalSection>
        <PrincipalSection>
@@ -71,7 +95,14 @@ export default function PrincipalPage() {
        modalVisible={modalIsOpen}
       produto={produto} 
       toggleModal={toggleModal}
-      handleCloseModal={toggleModal} />
+      handleCloseModal={toggleModal} 
+      />
+      <RefreshControl  
+      refreshing={isLojaLoading}
+      onRefresh={() => {
+        loadLojas();
+      }}
+      />
     </PrincipalContainer>
     );
 }

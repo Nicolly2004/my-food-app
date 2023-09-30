@@ -3,14 +3,33 @@ import { useLocalSearchParams } from "expo-router";
 import { LojaCover, LojaDescriptions, LojaLogo, LojaName } from "../../../styles/lojas";
 import { View } from "react-native";
 import { CardProduto } from "../../../components/CardProduto";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { ProdutoModal } from "../../../components/ProdutoModal";
 import { CardLojaProduto } from "../../../components/CardLojaProduto";
+import { LojaProps, getLoja } from "../../../services/lojas";
 
 export default function LojaIdPage() {
+    const [isLoadingLoja,setisLoadingLoja] = useState(false);
+    const [loja,setLoja] = useState<LojaProps>({} as LojaProps)
     const {id} = useLocalSearchParams();
     const [produtoVisible,setProdutoVisible] = useState(false);
     const [produto,setProduto] = useState({});
+
+
+
+    const loadLoja = () => {
+        setisLoadingLoja(true);
+        getLoja(Number(id))
+        .then(({data}) => {
+            setLoja(data);
+            setisLoadingLoja(false);
+        })
+        .catch((error) => {});
+    };
+
+    useEffect(() => {
+        loadLoja();
+    },[]);
 
     const toggleModal = () => {
         setProdutoVisible(!produtoVisible);
@@ -21,21 +40,24 @@ export default function LojaIdPage() {
         <View>
         <LojaCover 
           source={{
-            uri: "https://static.itdg.com.br/images/1200-630/150ba2d5d2874bed8561dd8edbdc1323/164773-original.jpg",
+            uri: loja.imageCover,
           }}
+
         />
         <Row grow={1} justifyContent="space-between" p="8px">
             <View >
-               <LojaName>Loja 01</LojaName>
+               <LojaName>{loja.nome}</LojaName>
                <Row>
-                <LojaDescriptions>20-30min</LojaDescriptions>
+                <LojaDescriptions>{loja.tempo}</LojaDescriptions>
                 <LojaDescriptions>•</LojaDescriptions>
-                <LojaDescriptions>Lanches</LojaDescriptions>
+                <LojaDescriptions>
+                    {loja.categoria}
+                </LojaDescriptions>
                </Row>
             </View>
             <LojaLogo 
                source={{
-                uri: "https://static.itdg.com.br/images/1200-630/150ba2d5d2874bed8561dd8edbdc1323/164773-original.jpg",
+                uri: loja.imageLogo,
                }}
             />
         </Row>
