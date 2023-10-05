@@ -1,5 +1,5 @@
 import { Stack, useGlobalSearchParams } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable,Text,TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useRouter} from 'expo-router';
 import { BackButton } from "../../styles/global";
@@ -7,7 +7,8 @@ import { AuthProvider } from "../../contexts/AuthContext";
 import { Providers } from "../Providers";
 import {useState, useEffect} from 'react';
 import { LojaProps, getLoja } from "../../services/lojas";
-
+import Popover from "react-native-popover-view";
+import { Cart } from "../../components/Cart";
 
 export default function PrincipalPageLayout() {
     const router = useRouter();
@@ -30,7 +31,22 @@ export default function PrincipalPageLayout() {
 
     return (
         <Providers>
-     <Stack>
+     <Stack 
+     screenOptions={{
+        headerRight({tintColor}) {
+            return (             <Popover
+            from={
+                <TouchableOpacity>
+                    <Icon name="shopping-cart" color={tintColor} size={20} />
+                </TouchableOpacity>
+            }
+            >
+             <Cart />
+            </Popover>
+            );
+        },
+     }}
+     >
         <Stack.Screen name="index"
         options={{
             title:"My Food",

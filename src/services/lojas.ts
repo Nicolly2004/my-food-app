@@ -1,5 +1,6 @@
 import { api } from "../settings/api";
 import { PaginatedResponse } from "./commom";
+import { ProdutoProps } from "./produtos";
 
 const RESOURCE_URL = '/lojas';
 
@@ -14,10 +15,11 @@ export interface LojaProps {
     taxa_entrega: number,
     imageCover: string,
     imageLogo: string,
+    produtos: ProdutoProps[]
 }
 
 
-interface LojaRequest extends Omit<LojaProps, "id" | "imageCover" |"imageLogo"| "nota">{
+interface LojaRequest extends Omit<LojaProps, "id" | "produtos" |"imageCover" |"imageLogo"| "nota">{
       logo?: string,
       cover?:string,
 }

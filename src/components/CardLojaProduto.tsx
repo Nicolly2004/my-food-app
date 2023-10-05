@@ -7,26 +7,30 @@ import { ProdutoContainer,
      ProdutoImg
     } from "../styles/produto"
 import { FC } from "react"
+import { ProdutoProps } from "../services/produtos";
 
-    interface CardLojaProdutoProps{
-        toggleModal: () => void;
+interface CardLojaProdutoProps{
+        toggleModal: (produto: ProdutoProps) => void;
+        produto: ProdutoProps;
 }
       
 
-export const CardLojaProduto: FC<CardLojaProdutoProps> = ({toggleModal}) => {
+export const CardLojaProduto: FC<CardLojaProdutoProps> = ({toggleModal,produto}) => {
     return (
-        <TouchableOpacity onPress={toggleModal}> 
+        <TouchableOpacity onPress={() => toggleModal(produto)}> 
         <ProdutoContainer>
             <Column>
-            <ProdutoName>Batata com Cheddar e Bacon</ProdutoName>
-            <ProdutoDesc>
-                Batata,cheddar e bacon acompanha molho do cheff
-            </ProdutoDesc>
-            <ProdutoPrice>R$ 75,93</ProdutoPrice>
+            <ProdutoName>{produto.nome}</ProdutoName>
+            <ProdutoDesc>{produto.descricao}</ProdutoDesc>
+            <ProdutoPrice>{produto.preco.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+            })}
+            </ProdutoPrice>
             </Column>
             <ProdutoImg 
             source={{
-                uri: "https://static.itdg.com.br/images/1200-630/150ba2d5d2874bed8561dd8edbdc1323/164773-original.jpg",
+                uri: produto.imagem,
             }}/>
             
         </ProdutoContainer>

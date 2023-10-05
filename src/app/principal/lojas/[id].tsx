@@ -1,19 +1,21 @@
 import { Column, Container, Divider, Row } from "../../../styles/global";
 import { useLocalSearchParams } from "expo-router";
 import { LojaCover, LojaDescriptions, LojaLogo, LojaName } from "../../../styles/lojas";
-import { View } from "react-native";
-import { CardProduto } from "../../../components/CardProduto";
+import { ActivityIndicator, View } from "react-native";
 import { useState,useEffect } from "react";
 import { ProdutoModal } from "../../../components/ProdutoModal";
 import { CardLojaProduto } from "../../../components/CardLojaProduto";
 import { LojaProps, getLoja } from "../../../services/lojas";
+import { CardProduto } from "../../../components/CardProduto";
+import { ProdutoProps } from "../../../services/produtos";
+
 
 export default function LojaIdPage() {
     const [isLoadingLoja,setisLoadingLoja] = useState(false);
     const [loja,setLoja] = useState<LojaProps>({} as LojaProps)
     const {id} = useLocalSearchParams();
     const [produtoVisible,setProdutoVisible] = useState(false);
-    const [produto,setProduto] = useState({});
+    const [produto,setProduto] = useState<ProdutoProps>({} as ProdutoProps);
 
 
 
@@ -34,9 +36,30 @@ export default function LojaIdPage() {
     const toggleModal = () => {
         setProdutoVisible(!produtoVisible);
     };
+
+    const handleOpenModal = (produto: ProdutoProps)=> {
+        produto.loja = loja;
+        setProduto(produto);
+        toggleModal();
+    };
     
+
+    const handleCloseModal = () => {
+        setProdutoVisible(false);
+        setProduto({} as ProdutoProps);
+    };
+
+    if(isLoadingLoja) {
     return (
-    <Container>
+     <Column>
+       <ActivityIndicator size="large" color="#FF0000"/>
+     </Column>
+    );
+}
+
+
+    return (  
+     <Container>
         <View>
         <LojaCover 
           source={{
@@ -65,14 +88,18 @@ export default function LojaIdPage() {
         </View>
 
         <View>
-            <CardLojaProduto toggleModal = {toggleModal}/>
-            <CardLojaProduto toggleModal = {toggleModal}/>
-            <CardLojaProduto toggleModal = {toggleModal}/>
+            {loja.produtos?.map((produto,index) => (
+                <CardProduto 
+                toggleModal={handleOpenModal} 
+                key={index} 
+                produto={produto}
+                />
+            ))}
         </View>
 
         <ProdutoModal 
         toggleModal={toggleModal}
-        handleCloseModal={toggleModal}
+        handleCloseModal={handleCloseModal}
         modalVisible={produtoVisible}
         produto={produto}
         />

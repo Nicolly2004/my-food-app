@@ -18,6 +18,7 @@ export const ModalFooter = styled.View`
  gap: 8px;
 flex-grow: 1;
 justify-content: flex-end;
+align-items: center;
 padding-bottom: 4px;
 `;
 

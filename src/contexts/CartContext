@@ -1,0 +1,81 @@
+import { getData, storeData } from './../services/storage';
+import { ReactNode, FC,createContext, useContext,useState, useEffect } from 'react';
+import { ProdutoProps } from './../services/produtos';
+
+
+interface CartProdutoProps extends ProdutoProps {
+    quantidade: number;
+}
+
+interface CartContextData {
+    produtos: CartProdutoProps[];
+    addProduto: (produto: ProdutoProps) => void;
+    removeProduto: (id: number) => void;
+    clearCart: () => void;
+}
+
+interface CartProviderProps {
+    children: ReactNode | ReactNode[];
+}
+
+const CartContext = createContext<CartContextData>({} as CartContextData);
+
+export const useCart = () => useContext(CartContext);
+
+export const CartProvider: FC<CartProviderProps> = ({ children }) => {
+    const [produtos,setProdutos] = useState<CartProdutoProps[]>([]);
+
+    useEffect(() => {
+        if (produtos.length == 0) {
+            getData('cart').then((data) => {
+                if (data) {
+                    setProdutos(JSON.parse(data));
+                }
+            });
+        }
+    },[]);
+
+    useEffect(() => {
+        if (produtos.length > 0) {
+            storeData('cart',JSON.stringify(produtos));
+        }
+    },[produtos]);
+
+    const buscaProduto = (id: number | string) => {
+        return produtos.find(item  => {
+            if (!item) return false;
+            return item.id == id;
+        })
+    }
+
+    const addProduto = (item: CartProdutoProps) => {
+        const produto = buscaProduto(item.id);
+        if (produto) {
+            const produtoIndex = produtos.indexOf(produto);
+            const newProdutos = [...produtos];
+            newProdutos[produtoIndex].quantidade +- item.quantidade;
+            setProdutos(newProdutos);
+            return;
+        }
+        setProdutos([...produtos,item]);
+    };
+
+    const removeProduto = (id: number | string ) => {
+        const produto = buscaProduto(id);
+        if(!produto) return;
+        const produtoIndex = produtos.indexOf(produto);
+        const newProdutos = [...produtos];
+        newProdutos.splice(produtoIndex,1);
+        setProdutos(newProdutos);
+    };
+
+    const clearCart = () => {
+        setProdutos([]);
+        storeData("cart", "[]");
+    };
+
+
+
+    return( <CartContext.Provider value={{}}>{children}</CartContext.Provider>);
+    
+}
